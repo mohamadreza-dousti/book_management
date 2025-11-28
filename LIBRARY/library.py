@@ -1,4 +1,4 @@
-from db import LibraryDB
+from database.db import LibraryDB
 
 class Library:
     def __init__(self, title=None, author=None, status=1):
