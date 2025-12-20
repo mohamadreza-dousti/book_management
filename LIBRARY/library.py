@@ -25,12 +25,18 @@ class Library:
         remove.remove_book(title)
         remove.close()
 
-    def search_book(self, title):
+    def search_book(self, title, val):
         # for book in Library.books:
         #     if book['status'] != False and book['title'] == title:
         #         return book 
         books = LibraryDB()
-        result = books.show_books()
+        if val == '1':
+            result = books.show_books1()
+        elif val == '0':
+            result = books.show_books0()
+        else:
+            result = books.show_books()
+
         books.close()
         ansewr = []
         for book in result:
