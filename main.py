@@ -22,7 +22,7 @@ def searchBook():
     os.system('cls')
     title = input("enter title: ")
     s_book = Library()
-    print(s_book.search_book(title))
+    print(s_book.search_book(title, 2))
 
 def showBooks():
     os.system('cls')
