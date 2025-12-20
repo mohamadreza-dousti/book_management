@@ -85,6 +85,12 @@ class Ui(ctk.CTk):
         title_ser = ctk.CTkEntry(frame, placeholder_text='enter title')
         title_ser.pack(pady=2)
 
+        option = ['1', '0', 'both']
+        filter_var = ctk.StringVar(value='status')
+        global filter
+        filter = ctk.CTkOptionMenu(frame, values=option, variable=filter_var, command=self.search)
+        filter.pack(pady=3)
+
         global search_btn_avalable
         search_btn_avalable = ctk.CTkButton(frame, text='search', command=self.search)
         search_btn_avalable.pack(pady=5)
@@ -153,11 +159,12 @@ class Ui(ctk.CTk):
         remove.removeBook(title_rem)
         
 
-    def search(self):
+    def search(self, value=1):
+        value = filter.get()
         for widget in scroll_frame.winfo_children():
             widget.destroy()
         search = MyApp()
-        res = search.searchBook(title_ser)
+        res = search.searchBook(title_ser, value)
         if res == []:
             book_lab = ctk.CTkLabel(scroll_frame, text='None', fg_color='black')
             book_lab.pack(pady=20)
