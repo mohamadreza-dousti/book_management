@@ -33,8 +33,7 @@ class Library:
         books.close()
         for book in result:
             if book[0] == title:
-                if book[2] != False:
-                    return book
+                return book
 
 
     def show_books(self):
