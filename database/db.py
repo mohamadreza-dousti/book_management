@@ -31,5 +31,13 @@ class LibraryDB:
         self.cursor.execute('SELECT * FROM books')
         return self.cursor.fetchall()
     
+    def show_books1(self):
+        self.cursor.execute('SELECT * FROM books WHERE status = ?', ('1',))
+        return self.cursor.fetchall()
+    
+    def show_books0(self):
+        self.cursor.execute('SELECT * FROM books WHERE status = ?', ('0',))
+        return self.cursor.fetchall()
+    
     def close(self):
         self.con.close()
