@@ -89,6 +89,25 @@ class Ui(ctk.CTk):
         search_btn_avalable = ctk.CTkButton(frame, text='search', command=self.search)
         search_btn_avalable.pack(pady=5)
 
+        global scroll_frame
+        scroll_frame = ctk.CTkScrollableFrame(frame, width=250, height=30)
+        scroll_frame.pack(pady=15)
+        scroll_frame.grid_columnconfigure(0, weight=1)
+        scroll_frame.grid_columnconfigure(1, weight=1)
+        scroll_frame.grid_columnconfigure(2, weight=1)
+
+        books = MyApp()
+        result = books.showBooks()
+        i=0
+        for book in result:
+            book_title = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'title:{book[0]}')
+            book_title.grid(row=i, column=0, pady=5)
+            book_author = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'author:{book[1]}')
+            book_author.grid(row=i, column=1)
+            book_status = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'status:{book[2]}')
+            book_status.grid(row=i, column=2)
+            i += 1
+
 
     def show_books(self):
         global frame
@@ -135,21 +154,23 @@ class Ui(ctk.CTk):
         
 
     def search(self):
-        search_btn_avalable.configure(state='disabled')
-        scroll_frame = ctk.CTkScrollableFrame(frame, width=250, height=30)
-        scroll_frame.pack(pady=15)
+        for widget in scroll_frame.winfo_children():
+            widget.destroy()
         search = MyApp()
         res = search.searchBook(title_ser)
-        if res == None:
+        if res == []:
             book_lab = ctk.CTkLabel(scroll_frame, text='None', fg_color='black')
             book_lab.pack(pady=20)
         else:
-            book_title = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'title:{res[0]}')
-            book_title.pack(pady=5)
-            book_author = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'author:{res[1]}')
-            book_author.pack(pady=5)
-            book_status = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'status:{res[2]}')
-            book_status.pack(pady=5)
+            i=0
+            for book in res:
+                book_title = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'title:{book[0]}')
+                book_title.grid(row=i, column=0, pady=5)
+                book_author = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'author:{book[1]}')
+                book_author.grid(row=i, column=1)
+                book_status = ctk.CTkLabel(scroll_frame, fg_color='black', text=f'status:{book[2]}')
+                book_status.grid(row=i, column=2)
+                i+=1
 
 
     def show(self):
