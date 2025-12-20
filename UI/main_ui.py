@@ -16,10 +16,10 @@ class MyApp():
         del_book = Library()
         del_book.remove_book(self.title)
 
-    def searchBook(self, title):
+    def searchBook(self, title, val):
         self.title = title.get()
         s_book = Library()
-        res = s_book.search_book(self.title)
+        res = s_book.search_book(self.title, val)
         return res
 
     
