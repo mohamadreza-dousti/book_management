@@ -1,4 +1,5 @@
 from database.db import LibraryDB
+import re
 
 class Library:
     def __init__(self, title=None, author=None, status=1):
@@ -31,9 +32,11 @@ class Library:
         books = LibraryDB()
         result = books.show_books()
         books.close()
+        ansewr = []
         for book in result:
-            if book[0] == title:
-                return book
+            if re.match(f'.*{title}.*', book[0]):
+                ansewr.append(book)
+        return ansewr
 
 
     def show_books(self):
